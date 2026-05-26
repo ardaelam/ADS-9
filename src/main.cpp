@@ -4,8 +4,6 @@
 #include <chrono>
 #include <random>
 #include <fstream>
-#include <cmath>
-#include <cstdlib>
 
 using namespace std::chrono;
 
@@ -29,6 +27,8 @@ int main() {
 
     const int MAX_N = 9;
     const int REPEATS = 500;
+
+    system("mkdir -p result");
 
     std::ofstream out("result/data.txt");
     out << "n\tall_ms\tperm1_avg_us\tperm2_avg_us\n";
@@ -76,39 +76,8 @@ int main() {
     }
     out.close();
 
-    std::ofstream script("plot.py");
-    script << R"(
-import matplotlib.pyplot as plt
-import numpy as np
-
-data = np.loadtxt('result/data.txt', skiprows=1)
-n = data[:, 0]
-all_ms = data[:, 1]
-perm1_us = data[:, 2]
-perm2_us = data[:, 3]
-
-plt.figure(figsize=(10,6))
-plt.plot(n, all_ms, 'o-', label='getAllPerms (мс)')
-plt.plot(n, perm1_us, 's-', label='getPerm1 (мкс, среднее)')
-plt.plot(n, perm2_us, 'd-', label='getPerm2 (мкс, среднее)')
-plt.yscale('log')
-plt.xlabel('Размер алфавита n')
-plt.ylabel('Время (логарифмическая шкала)')
-plt.title('Зависимость времени работы от n')
-plt.legend()
-plt.grid(True, which='both', linestyle='--', linewidth=0.5)
-plt.savefig('result/plot.png', dpi=150)
-plt.close()
-)";
-    script.close();
-
-    int ret = system("python plot.py");
-    if (ret != 0) {
-        std::cerr << "Не удалось выполнить Python-скрипт. Убедитесь, что установлен Python и matplotlib.\n";
-        std::cerr << "Данные сохранены в result/data.txt. Вы можете построить график вручную.\n";
-    } else {
-        std::cout << "График сохранён в result/plot.png\n";
-    }
+    std::cout << "\nЭксперимент завершён. Данные сохранены в result/data.txt\n";
+    std::cout << "Для построения графика запустите python plot.py\n";
 
     return 0;
 }
