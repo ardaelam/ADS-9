@@ -1,12 +1,13 @@
 // Copyright 2022 NNTU-CS
-#include "tree.h"
-#include <stdlib>
-#include <chrono>
-#include <cstdint>
-#include <fstream>
-#include <iostream>
-#include <random>
-#include <vector>
+#include "tree.h"  // NOLINT(build/include_order)
+
+#include <stdlib.h>   // NOLINT(build/include_order)
+#include <chrono>     // NOLINT(build/include_order)
+#include <cstdint>    // NOLINT(build/include_order)
+#include <fstream>    // NOLINT(build/include_order)
+#include <iostream>   // NOLINT(build/include_order)
+#include <random>     // NOLINT(build/include_order)
+#include <vector>     // NOLINT(build/include_order)
 
 int main() {
   // Example usage (required)
