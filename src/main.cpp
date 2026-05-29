@@ -1,8 +1,6 @@
 // Copyright 2022 NNTU-CS
 #include "tree.h"
-
 #include <stdlib.h>
-
 #include <chrono>
 #include <cstdint>
 #include <fstream>
@@ -29,11 +27,10 @@ int main() {
     std::cout << "\n\n";
   }
 
-  // Experiment
   const int MAX_N = 9;
   const int REPEATS = 500;
 
-  // Create result directory (suppress unused result warning)
+  // Create result directory
   if (system("mkdir -p result") == -1) {
     // Directory may already exist, ignore error
   }
@@ -46,7 +43,6 @@ int main() {
   out << "n\tall_ms\tperm1_avg_us\tperm2_avg_us\n";
 
   for (int n = 1; n <= MAX_N; ++n) {
-    // Alphabet: '1','2',... for n<=9 else 'a','b',...
     std::vector<char> symbols(n);
     for (int i = 0; i < n; ++i) symbols[i] = static_cast<char>('1' + i);
     if (n > 9) {
@@ -56,14 +52,12 @@ int main() {
     PMTree tree(symbols);
     int64_t totalPerms = tree.getFactorials()[n];
 
-    // getAllPerms
     auto start = std::chrono::high_resolution_clock::now();
     auto allPerms = getAllPerms(tree);
     auto end = std::chrono::high_resolution_clock::now();
     double timeAllMs = std::chrono::duration_cast<std::chrono::milliseconds>(
         end - start).count();
 
-    // getPerm1 (average over REPEATS random queries)
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int64_t> dist(1, totalPerms);
@@ -78,7 +72,6 @@ int main() {
     }
     double avgPerm1Us = static_cast<double>(sumTimePerm1) / REPEATS;
 
-    // getPerm2 (average)
     int64_t sumTimePerm2 = 0;
     for (int rep = 0; rep < REPEATS; ++rep) {
       int64_t num = dist(gen);
