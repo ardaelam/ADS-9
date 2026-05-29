@@ -1,9 +1,9 @@
 // Copyright 2022 NNTU-CS
-#include "tree.h"
-#include <stdlib>
-#include <algorithm>
-#include <cstdint>
-#include <vector>
+#include "tree.h"  // NOLINT(build/include_order)
+
+#include <algorithm>  // NOLINT(build/include_order)
+#include <cstdint>    // NOLINT(build/include_order)
+#include <vector>     // NOLINT(build/include_order)
 
 std::vector<PMTree::Node*> PMTree::buildLevel(const std::vector<char>& elems) {
   std::vector<Node*> nodes;
