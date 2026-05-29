@@ -1,6 +1,6 @@
 // Copyright 2022 NNTU-CS
-#ifndef TREE_H
-#define TREE_H
+#ifndef INCLUDE_TREE_H_
+#define INCLUDE_TREE_H_
 
 #include <cstdint>
 #include <vector>
