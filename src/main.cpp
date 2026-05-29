@@ -29,8 +29,7 @@ int main() {
   const int MAX_N = 9;
   const int REPEATS = 500;
 
-  if (system("mkdir -p result")) {
-  }
+  system("mkdir -p result");
 
   std::ofstream out("result/data.txt");
   if (!out.is_open()) {
@@ -55,7 +54,6 @@ int main() {
     double timeAllMs = std::chrono::duration_cast<std::chrono::milliseconds>(
         end - start).count();
 
-    // getPerm1 (average over REPEATS random queries)
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int64_t> dist(1, totalPerms);
