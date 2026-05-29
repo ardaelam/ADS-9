@@ -2,6 +2,7 @@
 #include "tree.h"
 
 #include <cstdlib>
+
 #include <chrono>
 #include <cstdint>
 #include <fstream>
@@ -32,8 +33,10 @@ int main() {
   const int MAX_N = 9;
   const int REPEATS = 500;
 
-  // Create result directory (ignore return value)
-  (void)system("mkdir -p result");
+  // Create result directory (suppress unused result warning)
+  if (system("mkdir -p result") == -1) {
+    // Directory may already exist, ignore error
+  }
 
   std::ofstream out("result/data.txt");
   if (!out.is_open()) {
