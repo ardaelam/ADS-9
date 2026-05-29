@@ -1,6 +1,6 @@
 // Copyright 2022 NNTU-CS
 #include "tree.h"
-#include <stdlib.h>
+#include <stdlib>
 #include <chrono>
 #include <cstdint>
 #include <fstream>
